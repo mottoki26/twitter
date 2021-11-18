@@ -5,10 +5,14 @@
     outline: none;
 }
 
+main {
+    text-align: center;
+}
+
 body {
     margin: 0;
     font-family: Sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .dashboard {
