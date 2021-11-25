@@ -1,9 +1,9 @@
 <?php
     session_start();
     session_regenerate_id(true);
-    $ope = false;
+    $signin = false;
     if(isset($_SESSION['signin'])) {
-        $ope = true;
+        $signin = true;
     } else {
         header('location:../');
         exit();
@@ -44,17 +44,13 @@
             ?>
             <form action="./editCheckWord.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="user_id" value="<?php print $user_id ?>">
-                <p><label>
-                    一言：
-                    <input type="text" name="word" value="<?php print $rec['word'] ?>">
-                </label></p>
+                <p><label>一言：</label>
+                <input type="text" name="word" value="<?php print $rec['word'] ?>"></p>
                 <?php if($rec['image']) { ?>
                     <p><img src="./img/<?php print $rec['image'] ?>"></p>
                 <?php } ?>
-                <p><label>
-                    画像：
-                    <input type="file" name="image" accept=".png,.gif">
-                </label></p>
+                <p><label>画像：</label>
+                <input type="file" name="image" accept=".png,.gif"></p>
                 <input type="button" value="戻る" onclick="history.back()">
                 <input type="submit" value="ツイート">
             </form>

@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    session_regenerate_id(true);
+    $user_id = $_SESSION['user_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -14,8 +20,10 @@
 
                     $post = sanitize($_POST);
 
-                    $user_id = $post['user_id'];
+                    $subject_id = $post['subject'];
+                    $subject_name = $post['subject_name'];
                     $word = $post['word'];
+                    $definition = $post['definition'];
                     $file = $_FILES['image'];
                     
                     $image_name = $file['name'];
@@ -28,11 +36,30 @@
                         }
                     }
 
-                    $sql = 'insert into reference(user_id, word, image) values(?,?,?)';
+                    if($subject_id == '') {
+                        $sql = 'insert into subject(subject_name) values(?)';
+                        $stmt = $dbh->prepare($sql);
+                        $data[] = $subject_name;
+                        $stmt->execute($data);
+
+                        $sql = 'select last_insert_id()';
+                        $stmt = $dbh->prepare($sql);
+                        $stmt->execute();
+
+                        if($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $subject_id = $rec['last_insert_id()'];
+                        }
+                    }
+
+                    $data = array();
+
+                    $sql = 'insert into reference(user_id, subject_id, word, definition, image) values(?,?,?,?,?)';
 
                     $stmt = $dbh->prepare($sql);
                     $data[] = $user_id;
+                    $data[] = $subject_id;
                     $data[] = $word;
+                    $data[] = $definition;
                     $data[] = $image_name;
                     $stmt->execute($data);
 

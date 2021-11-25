@@ -15,12 +15,29 @@ function samp(e) {
                 console.log(e);
             } */
         })
-        .done(function(data) {
-            console.log(data);
+        .done(function() {
+            console.log('done');
         })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+        .fail(function(e) {
+            console.log('fail');
         });
-}
+};
+$(function() {
+    $('#btn').on('click', function() {
+        console.log(this);
+        $.ajax({
+            type: "GET",
+            url: "./bookmark.php",
+            async: true,
+            data: {
+                r_id: this.value
+            }
+        }).
+        done(function() {
+            console.log(this);
+        }).
+        fail(function() {
+
+        });
+    });
+});
