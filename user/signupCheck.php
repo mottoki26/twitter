@@ -63,7 +63,7 @@
                         print '<input type="hidden" name="pass" value="'.$pass.'">';
                         print '<br>';
                         print '<script>';
-                        print 'setTimeout(\'document.forms[0].submit()\')';
+                        print 'document.forms[0].submit()';
                         print '</script>';
                         print '</form>';
                         

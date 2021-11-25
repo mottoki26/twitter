@@ -44,7 +44,7 @@
                         $flg = true;
                     } else {
                         $pass = hash('sha256', $pass);
-                        if($rec['password'] != $pass) {
+                        if(is_null($stmt) || $rec['password'] != $pass) {
                             $flg = true;
                         }
                     }

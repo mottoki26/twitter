@@ -8,7 +8,19 @@
     </head>
     <body>
         <main>
-            
+            <?php
+                print_r($_GET);
+                $data = array();
+                /* header('Content-type: text/html'); */
+                $data[] = array(
+                    'id' => 'test',
+                );
+                $data[] = array(
+                    'id' => 'test2',
+                );
+                header('Content-type: application/json');
+                print json_encode(['data' => $data], JSON_UNESCAPED_UNICODE);
+            ?>
         </main>
     </body>
 </html>

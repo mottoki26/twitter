@@ -8,8 +8,8 @@
         header('location:../');
         exit();
     }
-    $user_id = $_SESSION['user_id'];
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -20,12 +20,37 @@
     </head>
     <body>
         <main>
-            <form action="./addCheckWord.php" method="post" enctype="multipart/form-data">
+            <?php
+                require_once '../common/common.php';
+                if(isset($_GET['r_id'])) {
+                    $get = sanitize($_GET);
+                    $r_id = $get['r_id'];
+                } else {
+                    header('location:../');
+                    exit();
+                }
+
+                include_once '../common/dbConnection.php';
+
+                $sql = 'select word, image from reference where reference_id = ?';
+
+                $stmt = $dbh->prepare($sql);
+                $data[] = $r_id;
+                $stmt->execute($data);
+
+                $dbh = null;
+
+                $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+            ?>
+            <form action="./editCheckWord.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="user_id" value="<?php print $user_id ?>">
                 <p><label>
                     一言：
-                    <input type="text" name="word">
+                    <input type="text" name="word" value="<?php print $rec['word'] ?>">
                 </label></p>
+                <?php if($rec['image']) { ?>
+                    <p><img src="./img/<?php print $rec['image'] ?>"></p>
+                <?php } ?>
                 <p><label>
                     画像：
                     <input type="file" name="image" accept=".png,.gif">

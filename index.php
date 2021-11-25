@@ -1,6 +1,6 @@
 <?php
     session_start();
-    // session_regenerate_id(true);
+    session_regenerate_id(true);
     $ope = false;
     if(isset($_SESSION['signin'])) {
         $ope = true;
@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Twitter</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="./js/bookmark.js"></script>
     </head>
     <body>
         <header>
@@ -25,7 +27,6 @@
                 <form action="./search.php" method="post">
                     <input type="text" name="word" placeholder="検索">
                 </form>
-                <!-- <p><a href="./search.php"><button>検索</button></a></p> -->
                 <p><a href="./user/logout.php"><button>ログアウト</button></a></p>
             </ul>
         </header>
@@ -42,14 +43,12 @@
                     include_once './common/dbConnection.php';
                     
                     /* ツイート情報のSQL実行 */
-                    // $sql = 'select word, image, comment from user, reference, reply where 1 and user.user_id = reply.user_id and reference.reference_id = reply.reference_id';
                     $sql = 'select reference_id, user.user_id, name, word, image from user, reference where 1 and user.user_id = reference.user_id';
                     $stmt = $dbh->prepare($sql);
                     $stmt->execute();
 
                     /* ツイート情報のデータ取得 */
                     $recs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    /* print_r($recs); */
                     print '<br>';
 
                     /* 返信情報のSQL実行 */
@@ -59,32 +58,21 @@
 
                     /* 返信情報のデータ取得 */
                     $replys = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    /* print_r($replys); */
-                    $dbh = null;
 
-                    /* if(count($recs) == 0) {
-                        print '現在ツイートはありません';
-                    } else {
-                        foreach ($recs as $rec) {
-                            print_r($rec);
-                            print '<br>';
-                            print 'ユーザ名：'.$rec['name'].'<br>';
-                            print '一言：'.$rec['word'].'<br>';
-                            if($rec['image'] != '') {
-                                print '<img src="./reference/img/'.$rec['image'].'">';
-                            }
-                            if(isset($_SESSION['user_id']) && $rec['user_id'] == $_SESSION['user_id']) {
-                                print '編集<br>';
-                            }
-                        }
-                    } */
+                    /* データベースの切断 */
+                    $dbh = null;
                     
                 } catch(Exception $e) {
                     print '障害発生中';
                     print $e;
                     exit();
                 }
+
+                if(isset($_SESSION['user_id'])) {
+                    print '<button id="btn" value="'.$_SESSION['user_id'].'" onclick="samp(this)">テストボタン</button>';
+                }
             ?>
+
             <?php
                 if(count($recs) == 0) {
                     print '現在ツイートはありません';
@@ -92,17 +80,24 @@
             ?>
                 <div class="right-body">
                     <div class="scroll-cards">
-                            <?php foreach($recs as $rec) { ?>
+                        <?php foreach($recs as $rec) { ?>
                             <div class="card">
                                 <div class="mails">
                                     <div class="mail-names">
-                                        <?php print $rec['name'] ?><br>
-                                        <?php if($rec['image'] != '') { ?>
-                                            <img src="./reference/img/<?php print $rec['image'] ?>">
-                                        <?php } ?>
+                                        <?php print $rec['name'] ?>
                                     </div>
+                                    <?php
+                                        if($rec['image'] != '') {
+                                            print '<img src="./reference/img/'.$rec['image'].'" style="width: 50px">';
+                                        }
+                                        if($ope && $rec['user_id'] == $_SESSION['user_id']) {
+                                            print '<a href="./reference/editWord.php?r_id='.$rec['reference_id'].'">編集</a><br>';
+                                        }
+                                        print '<a href="./bookmark.php?r_id='.$rec['reference_id'].'"><button>Test</button></a>';
+                                    ?>
+                                    
                                 </div>
-                                <div class="mmail-info">
+                                <div class="mail-info">
                                     <?php print $rec['word'] ?>
                                 </div>
                                 <br>
