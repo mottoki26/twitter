@@ -2,75 +2,79 @@
 * {
     box-sizing: border-box;
     outline: none;
-  }
-  body {
+}
+
+body {
     margin: 0;
     font-family: Sans-serif;
     overflow: hidden;
-  }
-  .dashboard {
+}
+
+.dashboard {
     height: 100vh;
     display: flex;
-  }
-  .left {
+}
+
+.left {
     height: 100%;
     display: flex;
-  }
-  .sidebar {
+}
+
+.sidebar {
     width: 80px;
     height: 100%;
-    background-image: linear-gradient(
-      -225deg,
-      #5271c4 0%,
-      #b19fff 48%,
-      #eca1fe 100%
-    );
+    background-image: linear-gradient( -225deg, #5271c4 0%, #b19fff 48%, #eca1fe 100%);
     display: flex;
-  }
-  .wrapper {
+}
+
+.wrapper {
     padding: 0 25px;
     height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-  
-  .items {
+}
+
+.items {
     margin-top: 50px;
-  }
-  
-  .items > img {
+}
+
+.items>img {
     margin-bottom: 25px;
-  }
-  
-  .profile > img {
+}
+
+.profile>img {
     border-radius: 50%;
     width: 305x;
     height: 35px;
     border: 1px solid white;
-  }
-  .profile {
+}
+
+.profile {
     margin-top: auto;
-  }
-  .menu {
+}
+
+.menu {
     margin-top: 20px;
-  }
-  .navigation {
+}
+
+.navigation {
     width: 270px;
     border-right: 1px solid #ddd;
-  }
-  .abilan > img {
+}
+
+.abilan>img {
     width: 120px;
     margin-bottom: 30px;
     margin-left: -8px;
-  }
-  
-  .wrapper2 {
+}
+
+.wrapper2 {
     padding: 0 25px;
     height: 100%;
     overflow: auto;
-  }
-  
-  .compose {
+}
+
+.compose {
     width: 150px;
     text-align: center;
     height: 50px;
@@ -81,81 +85,92 @@
     font-size: 16px;
     padding-left: 20px;
     position: relative;
-  }
-  .folders {
+}
+
+.folders {
     margin-top: 30px;
     color: #b8b8b8;
     font-size: 14px;
-  }
-  .folder-icons {
+}
+
+.folder-icons {
     margin-top: 20px;
     display: flex;
     align-items: center;
-  }
-  
-  .icon-name1 {
+}
+
+.icon-name1 {
     margin-left: 10px;
     color: #8b47a9;
-  }
-  
-  .icon-name {
+}
+
+.icon-name {
     margin-left: 10px;
     color: grey;
-  }
-  .names {
+}
+
+.names {
     margin-left: 10px;
     font-weight: bold;
     font-size: 15px;
-  }
-  
-  .avatar > img {
+}
+
+.avatar>img {
     width: 35px;
     border-radius: 10px;
-  }
-  .section1 {
+}
+
+.section1 {
     margin-top: 25px;
     margin-bottom: 10px;
-  }
-  
-  .btn {
+}
+
+.btn {
     border-radius: 3px;
     border: 1px;
     padding: 0 10px 0 30px;
     height: 30px;
     font-weight: bold;
     position: relative;
-  }
-  
-  .buton1 {
+}
+
+.buton1 {
     background-color: #f8f1ff;
     color: #a84bfe;
-  }
-  .buton2 {
+}
+
+.buton2 {
     background-color: #fff1f6;
     color: #fe4b85;
-  }
-  .buton3 {
+}
+
+.buton3 {
     background-color: #eef0ff;
     color: #2632fe;
-  }
-  .buton4 {
+}
+
+.buton4 {
     background-color: #ebfbf8;
     color: #01c991;
-  }
-  .tag {
+}
+
+.tag {
     position: absolute;
     left: 8px;
     top: 10px;
-  }
-  .plus > img {
+}
+
+.plus>img {
     width: 16px;
     height: 16px;
-  }
-  .plus {
+}
+
+.plus {
     left: 10px;
     position: absolute;
-  }
-  .buton-span {
+}
+
+.buton-span {
     border-radius: 15px;
     padding: 5px 10px;
     border: 1px;
@@ -163,8 +178,9 @@
     background-color: #fe365c;
     box-shadow: 0px 0px 10px 2px #f7bfc9;
     margin-left: 70px;
-  }
-  .online {
+}
+
+.online {
     position: absolute;
     top: -5px;
     right: -5px;
@@ -174,266 +190,308 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-  }
-  .avatar {
+}
+
+.avatar {
     position: relative;
-  }
-  .red {
+}
+
+.red {
     background-color: #fe4663;
-  }
-  
-  .big-inbox {
+}
+
+.big-inbox {
     font-size: 25px;
     font-weight: 500;
-  }
-  .right-side {
+}
+
+.right-side {
     background-color: #f2f3f7;
     width: 100%;
     padding: 8px 30px;
     display: flex;
     flex-direction: column;
-  }
-  .right-body {
+}
+
+.right-body {
     flex: 1;
     display: flex;
     overflow: hidden;
-  }
-  .top-bar {
+}
+
+.top-bar {
     display: flex;
     align-items: center;
     text-align: center;
-  }
-  .top-bar-justify {
+}
+
+.top-bar-justify {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-  .top-bar-items {
+}
+
+.top-bar-items {
     align-items: center;
     display: flex;
     justify-content: space-between;
     width: 180px;
-  }
-  .profile2 > img {
+}
+
+.profile2>img {
     border-radius: 50%;
     width: 28x;
     height: 28px;
     border: 2px solid white;
     margin-left: 25px;
     margin-right: 5px;
-  }
-  .profile2 {
+}
+
+.profile2 {
     display: flex;
     align-items: center;
-  
     width: 120px;
-  }
-  .icon-name5 {
+}
+
+.icon-name5 {
     font-size: 13px;
     color: grey;
-  }
-  .new-hr {
+}
+
+.new-hr {
     border: 0.6px solid #ddd;
     margin-bottom: 25px;
-  }
-  .notif {
+}
+
+.notif {
     position: relative;
-  }
-  .pink {
+}
+
+.pink {
     background-color: #fe96db;
     width: 7px;
     height: 7px;
     margin: -3px;
-  }
-  
-  .checkbox > input {
+}
+
+.checkbox>input {
     width: 20px;
     height: 20px;
-  }
-  
-  .right-bottom {
+}
+
+.right-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  .down-arrow > img {
+}
+
+.down-arrow>img {
     width: 12px;
     height: 14px;
     margin-bottom: -2px;
     margin-left: 5px;
-  }
-  .new:hover {
+}
+
+.new:hover {
     background-color: white;
-  }
-  .new {
+}
+
+.new {
     border-radius: 4px;
     border: none;
     width: 40px;
     height: 30px;
     background-color: #edeef5;
-  }
-  .check {
+}
+
+.check {
     display: flex;
     align-items: center;
-  }
-  .has-search .text {
+}
+
+.has-search .text {
     padding-left: 30px;
     margin-left: 45px;
-  }
-  .form {
+}
+
+.form {
     display: flex;
     align-items: center;
-  }
-  .searchIcon {
+}
+
+.searchIcon {
     margin-left: 53px;
     position: absolute;
     margin-top: 2px;
-  }
-  .text {
+}
+
+.text {
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 280px;
     height: 30px;
     background-color: #edeef5;
-  }
-  .buttons {
+}
+
+.buttons {
     display: flex;
-  }
-  .middle-buttons {
+}
+
+.middle-buttons {
     display: flex;
-  }
-  
-  .scroll-cards {
+}
+
+.scroll-cards {
     width: 370px;
     height: 100%;
     overflow: auto;
-  
     padding: 20px 0px 5px 0px;
-  }
-  .card {
+}
+
+.card {
     background-color: white;
     border-radius: 4px;
     margin-top: 8px;
     margin-bottom: 5px;
     padding: 25px 25px 15px 25px;
     transition: 0.3s;
-  }
-  .card:hover {
+}
+
+.card:hover {
     box-shadow: 5px 1px 20px 1px #ddd;
     transform: scale(0.96);
-  }
-  
-  .mail-names {
+}
+
+.mail-names {
     color: grey;
     font-weight: bold;
     font-size: 15px;
     margin-left: 10px;
-  }
-  
-  .mails {
+}
+
+.mails {
     display: flex;
     align-items: center;
-  }
-  .mails > img {
+}
+
+.mails>img {
     width: 35px;
     border-radius: 10px;
-  }
-  .mail-info {
+}
+
+.mail-info {
     margin: 10px 65px;
     margin-left: 0px;
     line-height: 1.7;
     font-weight: 600;
-  }
-  .check1 {
+}
+
+.check1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100px;
-  }
-  .bottom-info {
+}
+
+.bottom-info {
     display: flex;
     justify-content: space-between;
-  }
-  .date {
+}
+
+.date {
     color: grey;
-  }
-  .person {
+}
+
+.person {
     width: 25px;
     height: 25px;
     border-radius: 10px;
     text-align: center;
     color: white;
     padding: 5px 3px 0px;
-  }
-  .border1 {
+}
+
+.border1 {
     background-color: #5f4bfd;
-  }
-  .border2 {
+}
+
+.border2 {
     background-color: #e32553;
-  }
-  .border3 {
+}
+
+.border3 {
     background-color: #01c828;
-  }
-  .message {
+}
+
+.message {
     margin: 20px 10px;
     flex: 1;
     background-color: white;
     padding: 25px;
     overflow: auto;
-  }
-  .mes-date {
+}
+
+.mes-date {
     color: grey;
     font-size: 14px;
-  }
-  .who {
+}
+
+.who {
     font-weight: 600;
-  }
-  .title {
+}
+
+.title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
     margin-top: 10px;
-  }
-  
-  .message-from {
+}
+
+.message-from {
     margin-top: 20px;
     color: grey;
     font-size: 17px;
-  }
-  .attachment-last {
+}
+
+.attachment-last {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 350px;
-  }
-  .att-write {
+}
+
+.att-write {
     color: grey;
-  }
-  .buton0 {
+}
+
+.buton0 {
     background-color: #ecefff;
     color: #7175c0;
-  }
-  .buton9 {
+}
+
+.buton9 {
     background-color: #e0f8e3;
     color: #79b992;
-  }
-  
-  .btn1 {
+}
+
+.btn1 {
     border-radius: 3px;
     border: 1px;
     height: 25px;
     font-weight: bold;
-  }
-  .inside-img > img {
+}
+
+.inside-img>img {
     width: 100px;
     border-radius: 10px;
     margin-top: 20px;
-  }
-  .inside-img > img:hover {
+}
+
+.inside-img>img:hover {
     transform: scale(0.95);
-  }
-  .son-buton {
+}
+
+.son-buton {
     width: 100px;
     height: 68px;
     border-radius: 10px;
@@ -443,14 +501,16 @@
     color: #b79ed8;
     font-weight: 500;
     font-size: 20px;
-  }
-  .son-images {
+}
+
+.son-images {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 520px;
-  }
-  .btn2 {
+}
+
+.btn2 {
     margin-top: 40px;
     border-radius: 3px;
     border: 1px;
@@ -458,35 +518,45 @@
     padding: 5px 30px;
     color: white;
     position: relative;
-  }
-  .butona {
+}
+
+.butona {
     background-color: #8e44ad;
-  }
-  .butonb {
+}
+
+.butonb {
     background-color: #fe4a85;
-  }
-  .butona:hover {
+}
+
+.butona:hover {
     background-color: #892bb4;
-  }
-  .butonb:hover {
+}
+
+.butonb:hover {
     background-color: #ec195f;
-  }
-  ::-webkit-scrollbar {
+}
+
+ ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-  
+}

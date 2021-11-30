@@ -42,12 +42,14 @@
                 </p>
                 <p><label>用語：</label>
                 <input type="text" name="word"></p>
+                <!-- <p><label>定義：</label>
+                <input type="text" name="definition"></p> -->
                 <p><label>定義：</label>
-                <input type="text" name="definition"></p>
+                <textarea name="definition"></textarea></p>
                 <p><label>画像：</label>
-                <input type="file" name="image" accept=".png,.gif"></p>
+                <input type="file" name="image" accept=".png"></p>
                 <input type="button" value="戻る" onclick="history.back()">
-                <input type="submit" value="ツイート">
+                <input type="submit" value="追加">
             </form>
         </main>
     </body>

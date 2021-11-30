@@ -18,6 +18,7 @@
                 try {
                     require_once '../common/common.php';
 
+                    $flg = false;
                     $post = sanitize($_POST);
 
                     $subject_id = $post['subject'];
@@ -27,11 +28,20 @@
                     $file = $_FILES['image'];
                     
                     $image_name = $file['name'];
+
+                    if($subject_id == '' && $subject_name) {
+                        print '科目を選択してください。';
+                        $flg = true;
+                    }
+
+                    if($word == '') {
+                        print '用語が入力されていません。';
+                    }
                     
                     include_once '../common/dbConnection.php';
 
                     if($image_name != '') {
-                        if(str_ends_with($image_name, '.png') || str_ends_with($image_name, '.gif')) {
+                        if(str_ends_with($image_name, '.png')) {
                             move_uploaded_file($file['tmp_name'], './img/'.$image_name);
                         }
                     }
@@ -70,7 +80,6 @@
 
                 } catch (Exception $e) {
                     print '障害発生中';
-                    print $e;
                     exit();
                 }
             ?>

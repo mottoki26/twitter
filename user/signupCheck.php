@@ -23,30 +23,26 @@
 
                     // メールアドレスの判定
                     if($mail == '') {
-                        print 'メールアドレスが入力されていません。';
+                        print 'メールアドレスが入力されていません。<br>';
                         $flg = true;
                     } else if(!preg_match('/\A[\w\-\.]+@[\w\-\.]+\.([a-z]+)\z/', $mail)) {   //メールアドレスの構文ミス判定
-                        print 'メールアドレスを正確に入力してください';
+                        print 'メールアドレスを正確に入力してください。<br>';
                         $flg = true;
-                    } else {
-                        print 'メールアドレス：'.$mail.'<br>';
                     }
 
                     // ユーザ名の判定
                     if($name == '') {
-                        print 'ユーザ名が入力されていません';
+                        print 'ユーザ名が入力されていません。<br>';
                         $flg = true;
-                    } else {
-                        print 'ユーザ名：'.$name.'<br>';
                     }
 
                     if($pass == '') {
-                        print 'パスワードが入力されていません';
+                        print 'パスワードが入力されていません。<br>';
                         $flg = true;
                     }
 
                     if($pass != $pass2) {
-                        print 'パスワードが違います。';
+                        print 'パスワードが違います。<br>';
                         $flg = true;
                     }
 
@@ -71,7 +67,7 @@
 
                 } catch (Exception $e) {
                     print '障害発生中';
-                    print $e;
+                    
                     exit();
                 }
             ?>

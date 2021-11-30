@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="../css/signin.css">
         <!-- <link rel="stylesheet" href="../css/style.css"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <!-- <script src="../js/signin.js"></script> -->
         <title>Twitter</title>
     </head>
     <body>

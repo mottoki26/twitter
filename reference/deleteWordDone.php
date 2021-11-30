@@ -1,7 +1,13 @@
 <?php
     session_start();
     session_regenerate_id(true);
-    $user_id = $_SESSION['user_id'];
+    $signin = false;
+    if(isset($_SESSION['signin'])) {
+        $signin = true;
+    } else {
+        // header('location:../');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,28 +23,32 @@
             <?php
                 try {
                     require_once '../common/common.php';
+                    if(isset($_POST['r_id'])) {
+                        $post = sanitize($_POST);
+                        $r_id = $post['r_id'];
+                    } else {
+                        header('location:../');
+                        exit();
+                    }
 
-                    $post = sanitize($_POST);
-                    $r_id = $post['r_id'];
-                    $comment = $post['comment'];
-                    
-                    
                     include_once '../common/dbConnection.php';
 
-                    $sql = 'insert into reply(reference_id, user_id, comment) values(?,?,?)';
+                    $sql = 'delete from bookmark where reference_id = :rid;';
 
+                    $sql .= 'delete from reply where reference_id = :rid;';
+
+                    $sql .= 'delete from reference where reference_id = :rid;';
+                    
                     $stmt = $dbh->prepare($sql);
-                    $data[] = $r_id;
-                    $data[] = $user_id;
-                    $data[] = $comment;
+                    $data[':rid'] = $r_id;
                     $stmt->execute($data);
 
                     $dbh = null;
 
-                    /* ホーム画面に戻る */
                     header('location:../');
-
-                } catch (Exception $e) {
+                    exit();
+                    
+                } catch(Exception $e) {
                     print '障害発生中';
                     exit();
                 }

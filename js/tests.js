@@ -1,25 +1,35 @@
 /// <Reference path="./jquery-3.6.0.min.js"/>
 
 $(function() {
-    var cards = $('.card');
-    for (var i = 0; i < cards.length; i++) {
-        cardAction(cards[i], i);
-    };
+    var bookmarks = $('.bi-bookmark');
+    var bookmark_fills = $('.bi-bookmark-fill');
+    /* for (var i = 0; i < bookmarks.length; i++) {
+        bookmark(bookmarks[i], i);
+        // bookmarks[i].addEventListener('click', bookmark());
+    }
 
-    function cardAction(cardDOM, cardId) {
-        // activeクラスの追加と削除
-        // cardDOMは、クリックされたオブジェクト
-        cardDOM.addEventListener("click", function() {
-            this.classList.toggle('active');
+    for (var i = 0; i < bookmark_fills.length; i++) {
+        bookmark(bookmark_fills[i], i);
+        // bookmark_fills[i].addEventListener('click', bookmark());
+    } */
 
-            // クリックされていないボタンにactiveがついていたら外す
-            for (var i = 0; i < cards.length; i++) {
-                if (cardId !== i) {
-                    if (cards[i].classList.contains('active')) {
-                        cards[i].classList.remove('active');
-                    }
-                }
-            }
+    function bookmark(book_dom) {
+        book_dom.addEventListener('click', function() {
+            $.ajax({
+                    url: "./bookmark.php",
+                    type: "GET",
+                    data: {
+                        r_id: this.dataset.id,
+                    },
+                })
+                .done(function() {
+                    console.log('done');
+                    book_dom.classList.toggle('bi-bookmark');
+                    book_dom.classList.toggle('bi-bookmark-fill');
+                })
+                .fail(function() {
+                    console.log('fail');
+                });
         });
     }
 });

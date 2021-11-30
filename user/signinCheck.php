@@ -54,6 +54,10 @@
                         print '<form>';
                         print '<input type="button" onclick="history.back()" value="戻る">';
                         print '</form>';
+                        // header("Content-type: application/json; charset=UTF-8");
+                        // echo json_encode(array('error' => 'メールアドレスまたはパスワードが違います'));
+                        // print json_encode(array('error' => '<h1>HELP</h1>'));
+                        exit;
                     } else {
                         session_start();
                         session_regenerate_id(true);
@@ -67,7 +71,6 @@
 
                 } catch (Exception $e) {
                     print '障害発生中';
-                    print $e;
                     exit();
                 }
             ?>

@@ -41,7 +41,7 @@
 
                 } catch (Exception $e) {
                     print '障害発生中';
-                    print $e;
+                    
                     exit();
                 }
             ?>

@@ -1,10 +1,11 @@
 <?php
-session_start();
-session_regenerate_id(true);
-$signin = false;
-if (isset($_SESSION['signin'])) {
-    $signin = true;
-}
+    session_start();
+    session_regenerate_id(true);
+    $signin = false;
+    if (isset($_SESSION['signin'])) {
+        $signin = true;
+        $user_id = $_SESSION['user_id'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -12,12 +13,18 @@ if (isset($_SESSION['signin'])) {
 
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="css/style.css">
+
+        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/css/modaal.min.css">
+        <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-6-3/css/9-6-3.css">
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Twitter</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-        <script src="./js/bookmark.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Modaal/0.4.4/js/modaal.min.js"></script>
+        <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-6-3/js/9-6-3.js"></script>
         <script src="./js/common.js"></script>
     </head>
 
@@ -28,9 +35,12 @@ if (isset($_SESSION['signin'])) {
                     <div class="menu">
                         <img src="https://i.ibb.co/B4Dn7CT/menu.png">
                     </div>
+                    <div class="profile">
+                        <i class="bi bi-gear" title="setting"></i>
+                    </div>
                 </div>
             </div>
-            <div class="navigation active">
+            <div class="navigation">
                 <div class="wrapper2">
                     <div class="abilan">
                         <!--<img src="https://i.ibb.co/HgJrt1p/abilan.png" />-->
@@ -51,6 +61,7 @@ if (isset($_SESSION['signin'])) {
                             </button>
                         </div>
                     </div>
+                    <p class="test">→ 確認画面モーダルリンク</p>
                     <div class="folder-icons">
                         <div class="icon1">
                             <!--<img src="https://i.ibb.co/2yLfX9W/sent-mail.png" />-->
@@ -65,81 +76,28 @@ if (isset($_SESSION['signin'])) {
                         </div>
                         <div class="icon-name">Search</div>
                     </div>
-                    <div class="folder-icons">
-                        <div class="icon1">
-                            <!-- <img src="https://i.ibb.co/z4QhcbD/email.png" />-->
-                            <i class="bi bi-dice-5"></i>
-                        </div>
-                        <div class="icon-name">log out</div>
-                    </div>
-                    <div class="folder-icons">
-                        <div class="icon1">
-                            <!--<img src="https://i.ibb.co/3MzfGDF/bug.png" />-->
-                        </div>
-                        <!--<div class="icon-name">Spam</div>-->
-                    </div>
-                    <div class="folder-icons">
-                        <div class="icon1">
-                            <!--<img src="https://i.ibb.co/xfcFLCN/waste-bin.png" />-->
-                        </div>
-                        <!--<div class="icon-name">Trash</div>-->
-                    </div>
-                    <div class="folders">
-                        follow
-                    </div>
-                    <div class="folder-icons">
-                        <div class="avatar">
-                            <div class="online">
+                    <?php if($signin) { ?>
+                        <div class="folder-icons">
+                            <div class="icon1">
+                                <!-- <img src="https://i.ibb.co/z4QhcbD/email.png" />-->
+                                <i class="bi bi-dice-5"></i>
                             </div>
-                            <!--<img src="https://randomuser.me/api/portraits/women/65.jpg" />-->
-                            <i class="bi bi-emoji-smile"></i>
+                            <div class="icon-name">Logout</div>
                         </div>
-                        <div class="names">Don Allen
-                        </div>
+                    <?php } else { ?>
+                        <div class="folder-icons">
+                            <div class="icon1">
 
-                    </div>
-                    <div class="folder-icons">
-                        <div class="avatar">
-                            <div class="online">
                             </div>
-                            <!--<img src="https://randomuser.me/api/portraits/women/71.jpg" />-->
-                            <i class="bi bi-emoji-smile"></i>
+                            <div class="icon-name">Signup</div>
                         </div>
-                        <div class="names">Aaron Tim</div>
-                    </div>
-                    <div class="folder-icons">
-                        <div class="avatar">
-                            <div class="online red">
-                            </div>
-                            <!--<img src="https://randomuser.me/api/portraits/men/54.jpg" />-->
-                            <i class="bi bi-emoji-smile"></i>
-                        </div>
-                        <div class="names">Jack Joe</div>
-                    </div>
-                    <div class="folders">
-                        Labels
-                    </div>
-                    <div class="section1">
-                        <button class="btn button1"> Important
-            <span class="tag">
-              <img src="https://i.ibb.co/Zdx3jGx/tag.png"/></span>
-            </button>
+                        <div class="folder-icons">
+                            <div class="icon1">
 
-                        <button class="btn button2"> New
-              <span class="tag">
-              <img src="https://i.ibb.co/N1SMfgQ/tag.png"/></span>
-            </button>
-                    </div>
-                    <div class="section2">
-                        <button class="btn button3"> Old
-               <span class="tag">
-              <img src="https://i.ibb.co/C5q0MDM/tag.png"/></span>
-             </button>
-                        <button class="btn button4"> Priority
-               <span class="tag">
-              <img src="https://i.ibb.co/DMmSZW0/tag.png"/></span>
-             </button>
-                    </div>
+                            </div>
+                            <div class="icon-name">Signin</div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -152,7 +110,7 @@ if (isset($_SESSION['signin'])) {
                             Inbox
                         </div>
 
-                        <div class="top-bar-items">
+                        <!-- <div class="top-bar-items">
                             <div class="notif">
                                 <div class="online pink">
                                 </div>
@@ -161,18 +119,18 @@ if (isset($_SESSION['signin'])) {
                             <img src="https://i.ibb.co/vz4HYJb/envelope.png">
                             <img src="https://i.ibb.co/52Vkq4M/earth-globe.png">
                             <div class="icon-name5"> English </div>
-                        </div>
+                        </div> -->
                     </div>
+                    <?php if($signin) { ?>
                     <div class="profile2">
                         <!-- <img src="https://www.seekclipart.com/clipng/middle/103-1032140_graphic-transparent-1-vector-flat-small-user-icon.png"> -->
-                        <img src="" alt="">
-                        <div class="icon-name5">Larry Nunez</div>
+                        <!-- <div class="icon-name5">Larry Nunez</div> -->
+                        <div class="icon-name5"><?php print $_SESSION['name']; ?></div>
                     </div>
-                    <ul style="list-style-type: none; padding: 0; width: 300px;">
+                    <?php } ?>
+                    <!-- <ul style="list-style-type: none; padding: 0; width: 300px;">
                         <?php if ($signin) { ?>
-                            <li>
-                                <p><?php print $_SESSION['name'] ?></p>
-                            </li>
+
                         <?php } else { ?>
                             <li>
                                 <p><a href="./user/signin.php"><button>サインイン</button></a></p>
@@ -181,7 +139,7 @@ if (isset($_SESSION['signin'])) {
                                 <p><a href="./user/signup.php"><button>サインアップ</button></a></p>
                             </li>
                         <?php } ?>
-                    </ul>
+                    </ul> -->
                 </div>
 
                 <hr class="new-hr">
@@ -225,12 +183,13 @@ if (isset($_SESSION['signin'])) {
                     /* データベース接続ファイルの使用 */
                     include_once './common/dbConnection.php';
 
-                    /* ツイート情報のSQL実行 */
-                    $sql = 'select reference_id, user.user_id, subject.subject_name, name, word, definition, image from user, reference, subject where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id';
+                    /* リファレンス情報のSQL実行 */
+                    $sql = 'select reference_id, user.user_id, subject.subject_name, name, word, definition, image from user, reference, subject
+                            where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id';
                     $stmt = $dbh->prepare($sql);
                     $stmt->execute();
 
-                    /* ツイート情報のデータ取得 */
+                    /* リファレンス情報を連想配列でデータ取得 */
                     $references = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     print '<br>';
 
@@ -239,31 +198,27 @@ if (isset($_SESSION['signin'])) {
                     $stmt = $dbh->prepare($sql);
                     $stmt->execute();
 
-                    /* 返信情報のデータ取得 */
+                    /* 返信情報を連想配列でデータ取得 */
                     $replys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($signin) {
                         /* ブックマーク情報のSQL実行 */
                         $sql = 'select reference_id, user_id from bookmark where user_id = ?';
                         $stmt = $dbh->prepare($sql);
-                        $data[] = $_SESSION['user_id'];
+                        $data[] = $user_id;
                         $stmt->execute($data);
 
-                        /* ブックマーク情報の取得 */
+                        /* ブックマーク情報を連想配列で取得 */
                         $bookmarks = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     }
 
                     /* データベースの切断 */
                     $dbh = null;
+
                 } catch (Exception $e) {
                     print '障害発生中';
-                    print $e;
                     exit();
                 }
-
-                /* if ($signin) {
-                    print '<button id="btn" value="' . $_SESSION['user_id'] . '" onclick="samp(this)"><i class="bi bi-bookmark-fill"></i>テストボタン</button><br>';
-                } */
             ?>
 
             <div class="right-body">
@@ -286,7 +241,7 @@ if (isset($_SESSION['signin'])) {
                         <div></div>
                         <div class="bottom-info">
                             <div class="star">
-                                <i class="bi bi-bookmark"></i>
+                                <i class="bi bi-bookmark" data-id="1"></i>
                             </div>
                         </div>
                     </div>
@@ -309,9 +264,7 @@ if (isset($_SESSION['signin'])) {
                                 ?>
                             </div>
                             <div class="mail-info">
-                                <!-- <script id="script" src="./js/tests.js" data-json-test='<?php /* print json_encode($reference); */ ?>'></script> -->
-                                
-                                <p id="test" data-json-test='<?php print json_encode($reference); ?>'><?php print $reference['subject_name']; ?></p>
+                                <p><?php print $reference['subject_name'] ?></p>
                                 <?php print $reference['word'] ?>
                             </div>
                             <?php if ($signin) { ?>
@@ -322,10 +275,11 @@ if (isset($_SESSION['signin'])) {
                                         foreach ($bookmarks as $bookmark) {
                                             if ($reference['reference_id'] == $bookmark['reference_id']) {
                                                 $class_name .= '-fill';
+                                                break;
                                             }
                                         }
                                         print '<div class="star">';
-                                        print '<a href="./bookmark.php?r_id=' . $reference['reference_id'] . '"><i class="' . $class_name . '"></i></a>';
+                                        print '<i class="' . $class_name . '" data-id="'.$reference['reference_id'].'" title="ブックマーク"></i>';
                                         print '</div>';
                                     ?>
                                     <!-- <div class="star">
@@ -334,18 +288,6 @@ if (isset($_SESSION['signin'])) {
                                     </div> -->
                                 </div>
                             <?php } ?>
-                            <?php
-                            /* if (count($replys) > 0) {
-                                print '<div style="margin-left: 10rem; text-align: left;">';
-                                foreach ($replys as $reply) {
-                                    if ($reference['reference_id'] == $reply['reference_id']) {
-                                        print '返信者：' . $reply['name'] . '<br>';
-                                        print '返信コメ：' . $reply['comment'] . '<br>';
-                                    }
-                                }
-                                print '</div>';
-                            } */
-                            ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -353,6 +295,8 @@ if (isset($_SESSION['signin'])) {
                 <?php /* リファレンス表示終了 */ ?>
 
                 <div class="message">
+                    <i class="bi bi-three-dots-vertical" style="float: right;"></i>
+                    <button style="float: right;" name="delete">削除</button>
                     <div class="title">
                         用語
                     </div>
@@ -362,11 +306,11 @@ if (isset($_SESSION['signin'])) {
                             定義
                         </p>
                     </div>
-                    <button class="btn2 buttona"> Reply
-                        <span class="tag">
-                            <img src="https://i.ibb.co/GQf8frw/reply.png">
-                        </span>
-                    </button>
+                    <div class="attachment-last">
+                        <i class="bi bi-images"></i>
+                    </div>
+                    <i class="bi bi-chat-left-text" data-id="1"></i>
+                    <div class="reply"></div>
                 </div>
                 <?php foreach($references as $reference) { ?>
                     <div class="message">
@@ -379,19 +323,49 @@ if (isset($_SESSION['signin'])) {
                                 <?php print $reference['definition']; ?>
                             </p>
                         </div>
+                        <div class="attachment-last">
+                            <?php if(isset($user_id) && $reference['user_id'] == $user_id /* && $reference['image'] != '' */) { ?>
+                                <i class="bi bi-images"></i>
+                            <?php } ?>
+                        </div>
                         <?php /* 返信 */ ?>
-                        <a href="./reply/addReply.php?r_id=<?php print $reference['reference_id'] ?>"><i class="bi bi-chat-left-text"></i></a>
-                        <?php
-                            if (count($replys) > 0) {
-                                print '<div>';
-                                foreach ($replys as $reply) {
-                                    if ($reference['reference_id'] == $reply['reference_id']) {
-                                        print '返信者：' . $reply['name'] . '<br>';
-                                        print '返信コメ：' . $reply['comment'] . '<br>';
+                        <?php if ($signin) { ?>
+                            <!-- <a href="./reply/addReply.php?r_id=<?php print $reference['reference_id'] ?>"><i class="bi bi-chat-left-text" data-id="<?php print $reference['reference_id']; ?>"></i></a> -->
+                            <?php
+                                // print '<a href="./reply/addReply.php?r_id='.$reference['reference_id'].'">';
+                                print'<i class="bi bi-chat-left-text" data-id="'.$reference['reference_id'].'"></i>';
+                                // print '</a>';
+
+                                /* ブックマーク */
+                                $class_name = 'bi bi-bookmark';
+                                foreach ($bookmarks as $bookmark) {
+                                    if ($reference['reference_id'] == $bookmark['reference_id']) {
+                                        $class_name .= '-fill';
+                                        break;
                                     }
                                 }
-                                print '</div>';
+                                print '<i class="' . $class_name . '" data-id="'.$reference['reference_id'].'" title="ブックマーク"></i>';
                             }
+
+                            print '<div class="reply">';
+                            if (count($replys) > 0) {
+                                print '<br>';
+                                foreach ($replys as $reply) {
+                                    if ($reference['reference_id'] == $reply['reference_id']) {
+                                        // print '<div class="new-hr"></div>';
+                                        print '<div style="border: 0.6px solid #ddd;"></div>';
+                                        print '<div class="mails">';
+                                        // print '返信者：' . $reply['name'] . '<br>';
+                                        print '<div class="mail-names">'.$reply['name'].'</div>';
+                                        print '</div>';
+                                        print '<div class="mail-info">';
+                                        // print '返信コメ：' . $reply['comment'] . '<br>';
+                                        print $reply['comment'];
+                                        print '</div>';
+                                    }
+                                }
+                            }
+                            print '</div>';
                         ?>
                     </div>
                 <?php } ?>

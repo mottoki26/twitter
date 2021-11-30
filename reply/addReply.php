@@ -23,7 +23,29 @@
             <?php
                 require_once '../common/common.php';
 
-                $get = sanitize($_GET);
+                if(isset($_GET['r_id'])) {
+                    $get = sanitize($_GET);
+                } else {
+                    header('location:../');
+                    exit();
+                }
+
+                include_once '../common/dbConnection.php';
+
+                $sql = 'select name, subject_name, word, definition from user, reference, subject
+                        where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id and reference_id = ?';
+                $stmt = $dbh->prepare($sql);
+                $data[] = $get['r_id'];
+                $stmt->execute($data);
+
+                $dbh = null;
+
+                if($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    print '投稿者：'.$rec['name'].'<br>';
+                    print '科目：'.$rec['subject_name'].'<br>';
+                    print '用語：'.$rec['word'].'<br>';
+                    print '定義：'.$rec['definition'].'<br>';
+                }
             ?>
             <form action="./addCheckReply.php" method="post">
                 <input type="hidden" name="r_id" value="<?php print $get['r_id'] ?>">
