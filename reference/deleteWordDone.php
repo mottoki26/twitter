@@ -5,12 +5,12 @@
     if(isset($_SESSION['signin'])) {
         $signin = true;
     } else {
-        // header('location:../');
+        header('location:../');
         exit();
     }
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="utf-8">
@@ -33,6 +33,15 @@
 
                     include_once '../common/dbConnection.php';
 
+                    $sql = 'select image from reference where reference_id = :rid';
+
+                    $stmt = $dbh->prepare($sql);
+                    $data[':rid'] = $r_id;
+                    $stmt->execute($data);
+
+                    $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $image = $rec['image'];
+
                     $sql = 'delete from bookmark where reference_id = :rid;';
 
                     $sql .= 'delete from reply where reference_id = :rid;';
@@ -40,10 +49,13 @@
                     $sql .= 'delete from reference where reference_id = :rid;';
                     
                     $stmt = $dbh->prepare($sql);
-                    $data[':rid'] = $r_id;
                     $stmt->execute($data);
 
                     $dbh = null;
+
+                    if($image != '') {
+                        unlink('./img/'. $image);
+                    }
 
                     header('location:../');
                     exit();
@@ -55,4 +67,8 @@
             ?>
         </main>
     </body>
-</html>
+</html> -->
+
+<?php
+    
+?>

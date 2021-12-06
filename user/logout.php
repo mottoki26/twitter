@@ -16,6 +16,9 @@
         <title>Twitter</title>
     </head>
     <body>
+        <script>
+            setTimeout(window.location = "./signin.php");
+        </script>
         <main>
             ログアウトしました。<br>
             <br>

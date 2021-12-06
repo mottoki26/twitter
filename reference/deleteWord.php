@@ -33,7 +33,7 @@
 
                     include_once '../common/dbConnection.php';
 
-                    $sql = 'select word from reference where reference_id = ?';
+                    $sql = 'select word, image from reference where reference_id = ?';
                     
                     $stmt = $dbh->prepare($sql);
                     $data[] = $r_id;

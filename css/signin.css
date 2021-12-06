@@ -1,6 +1,8 @@
+/* 変更した内容は　background-colorを　#f2f3f7　に変更した */
+
 body {
     font-family: sans-serif;
-    background-color: #E6E6E6;
+    background-color: #f2f3f7;
 }
 
 main {
@@ -26,7 +28,7 @@ input[type="password"] {
     padding: 14px 10px;
     width: 280px;
     outline: none;
-    color: white;
+    color: #f2f3f7;
     border-radius: 24px;
     transition: 0.25s;
 }
@@ -46,7 +48,7 @@ input[type="button"] {
     ;
     padding: 10px 20px;
     outline: none;
-    color: #EAEAEA;
+    color: #f2f3f7;
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer;
@@ -59,12 +61,12 @@ input[type="button"]:hover {
 
 h1 {
     padding-bottom: 30px;
-    text-shadow: 1px 0 0 #EAEAEA, 0 1px 0 #EAEAEA, -1px 0 0 #EAEAEA, 0 -1px 0 #EAEAEA;
+    text-shadow: 1px 0 0 #f2f3f7, 0 1px 0 #f2f3f7, -1px 0 0 #f2f3f7, 0 -1px 0 #f2f3f7;
     color: #252A34;
 }
 
 label {
     margin: 0;
     padding: 0;
-    color: #EAEAEA;
+    color: #f2f3f7;
 }

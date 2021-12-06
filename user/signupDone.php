@@ -41,6 +41,12 @@
                     exit();
                 }
             ?>
+
+            <script>
+                setTimeout(() => {
+                    window.location = "../";
+                });
+            </script>
             <a href="../"><button>戻る</button></a>
         </main>
     </body>
