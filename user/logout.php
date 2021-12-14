@@ -19,10 +19,5 @@
         <script>
             setTimeout(window.location = "./signin.php");
         </script>
-        <main>
-            ログアウトしました。<br>
-            <br>
-            <a href="../">ホーム画面へ</a>
-        </main>
     </body>
 </html>

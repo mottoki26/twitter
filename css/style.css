@@ -553,6 +553,8 @@ body {
 .bi-bookmark,
 .bi-bookmark-fill {
     font-size: 50px;
+    color: #ff8303;
+    color: #ffc107;
 }
 
 .bi-download {
@@ -636,8 +638,92 @@ body {
 
 /* 削除ボタン */
 
+.edit,
 .delete {
     float: right;
+    margin-left: 10px;
+}
+
+
+/* create */
+
+.create_a {
+    /* margin-left: 46%; */
+    /* border : 2px solid black; */
+    margin-left: 30%;
+    color: #fff;
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    background-color: #555;
+}
+
+.create_a:hover {
+    background-color: #1B1A17;
+    -webkit-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+}
+
+.item {
+    padding: 5px 0;
+    border-bottom: 2px dashed #ddd;
+    width: max-content;
+}
+
+.item-label {
+    border-bottom: 2px dashed #ddd;
+}
+
+.item label {
+    width: max-content;
+    padding-right: 10px;
+}
+
+.item select {
+    border-bottom: 2px dashed #ddd;
+    width: max-content;
+}
+
+.item input {
+    padding-top: 5px;
+    width: 450px;
+}
+
+.item-text {
+    border-bottom: 2px dashed #ddd;
+    padding: 5px 0;
+    width: max-content;
+}
+
+.item-text textarea {
+    border-bottom: 2px dashed #ddd;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 500px;
+    height: 150px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.item-img {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.create-form {
+    margin-left: 25%;
+}
+
+
+/* プロフィールcss */
+
+.pro {
+    position: fixed;
+    bottom: 0;
+}
+
+.pro a {
+    color: white;
 }
 
 

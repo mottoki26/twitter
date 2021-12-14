@@ -1,53 +1,37 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Twitter</title>
-    </head>
-    <body>
-        <main>
-            <?php
-                try {
-                    
-                    require_once '../common/common.php';
+<?php
+    try {
+        require_once '../common/common.php';
 
-                    $post = sanitize($_POST);
+        $post = sanitize($_POST);
 
-                    $mail = $post['mail'];
-                    $name = $post['name'];
-                    $pass = $post['pass'];
+        $mail = $post['mail'];
+        $name = $post['name'];
+        $pass = $post['pass'];
 
-                    // データベース接続ファイルの使用
-                    include_once '../common/dbConnection.php';
+        $pass = hash('sha256', $pass);
 
-                    $sql = 'insert into user(mail, name, password) values(?,?,?)';
-                    $stmt = $dbh->prepare($sql);
-                    
-                    $data[] = $mail;
-                    $data[] = $name;
-                    $data[] = $pass;
+        // データベース接続ファイルの使用
+        include_once '../common/dbConnection.php';
 
-                    $stmt->execute($data);
+        $sql = 'insert into user(mail, name, password) values(?,?,?)';
+        $stmt = $dbh->prepare($sql);
+        
+        $data[] = $mail;
+        $data[] = $name;
+        $data[] = $pass;
 
-                    $dbh = null;
+        $stmt->execute($data);
 
-                    print 'ユーザを作成しました<br>';
-            
-                } catch (Exception $e) {
-                    print '障害発生中';
-                    
-                    exit();
-                }
-            ?>
+        $dbh = null;
 
-            <script>
-                setTimeout(() => {
-                    window.location = "../";
-                });
-            </script>
-            <a href="../"><button>戻る</button></a>
-        </main>
-    </body>
-</html>
+        // print 'ユーザを作成しました<br>';
+        $error['status'] = 'OK';
+
+    } catch (Exception $e) {
+        // print '障害発生中';
+        $error['status'] = 'SERVER_ERROR';
+    }
+    print json_encode($error);
+    header('Content-type: application/json; charset=utf8');
+    exit();
+?>

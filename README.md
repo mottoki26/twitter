@@ -8,14 +8,18 @@ twitter
 table : user
 mail, user_id, name, password
 
-## リファレンス情報
+# リファレンス情報
 table : reference
-reference_id, user_id, word, definition, image
+reference_id, user_id, subject_id, word, definition, image
 
-## 返信情報
+# 返信情報
 table : reply
 reference_id, user_id, comment
 
-## ブックマーク情報
+# ブックマーク情報
 table : bookmark
 user_id, reference_id
+
+# 科目情報
+table : subject
+subject_id, subject_name

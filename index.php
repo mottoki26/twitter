@@ -14,19 +14,19 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-        
-        <link rel="stylesheet" href="./css/style.css">
 
         <!-- モーダルウィンドウ -->
         <link rel="stylesheet" href="./css/modal_reset.css">
         <link rel="stylesheet" href="./css/modal.min.css">
+        <link rel="stylesheet" href="./css/modal.css">
 
+        <link rel="stylesheet" href="./css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Twitter</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="./js/modal.min.js"></script>
-        <link rel="stylesheet" href="./css/modal.css">
         <script src="./js/common.js"></script>
+        <script src="./js/bookmark.js"></script>
     </head>
 
     <body class="dashboard">
@@ -42,20 +42,20 @@
                 <div class="wrapper2">
                     <div class="folders">Folders</div>
                     <?php if($signin) { ?>
-                        <div class="folder-icons inline" href="#add">
+                    <div class="folder-icons inline" href="#add">
                         <div class="icon">
                             <i class="bi bi-pen"></i>
                         </div>
-                        <div class="icon-name">作成</div>
+                        <div class="icon-name">Create</div>
                     </div>
-                    <?php } ?>
 
                     <div class="folder-icons">
                         <div class="icon">
                             <i class="bi bi-book"></i>
                         </div>
-                        <div class="icon-name">Index</div>
+                        <div class="icon-name">Bookmark</div>
                     </div>
+                    <?php } ?>
 
                     <div class="folder-icons">
                         <div class="icon1">
@@ -69,7 +69,7 @@
                             <div class="icon1">
                                 <i class="bi bi-box-arrow-left"></i>
                             </div>
-                            <div class="icon-name">Logout</div>
+                            <div class="icon-name">Signout</div>
                         </div>
                     <?php } else { ?>
                         <div class="folder-icons">
@@ -85,6 +85,11 @@
                             <div class="icon-name">Signin</div>
                         </div>
                     <?php } ?>
+
+                    <div class="pro">
+                        <!-- window.location='profile/profile.html' -->
+                        <a href="profile/profile.html" target="_blank">チームのプロフィール</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +99,7 @@
                 <div class="top-bar">
                     <div class="top-bar-justify">
                         <div class="big-Index">
-                            Index
+                            Home
                         </div>
                     </div>
                     <?php if($signin) { ?>
@@ -110,7 +115,7 @@
 
                     <div class="middle-buttons">
                         <form action="./search.php" method="post" class="form has-search">
-                            <input class="text" type="search" placeholder="検索" name="search">
+                            <input class="text" type="search" placeholder="検索" name="search" onsubmit="this.value=''">
                             <span class="searchIcon">
                                 <img src="https://i.ibb.co/sqFgRq8/search.png">
                             </span>
@@ -127,13 +132,12 @@
 
                     /* リファレンス情報のSQL実行 */
                     $sql = 'select reference_id, user.user_id, subject_name, name, word, definition, image from user, reference, subject
-                            where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id';
+                            where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id order by reference.reference_id desc';
                     $stmt = $dbh->prepare($sql);
                     $stmt->execute();
 
                     /* リファレンス情報を連想配列でデータ取得 */
                     $references = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    print '<br>';
 
                     /* 返信情報のSQL実行 */
                     $sql = 'select name, comment, reference_id from user, reply where user.user_id = reply.user_id';
@@ -152,9 +156,23 @@
 
                         /* ブックマーク情報を連想配列で取得 */
                         $bookmarks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    }
-            ?>
 
+                        $sql = 'select subject_id, subject_name from subject';
+                        $stmt = $dbh->prepare($sql);
+                        $stmt->execute();
+
+                        $dbh = null;
+
+                        $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    }
+
+                /* リファレンス表示のtry文 */
+                } catch (Exception $e) {
+                    print '<br><h2>障害発生中</h2>';
+                    exit();
+                }
+            ?>
+            <br>
             <div class="right-body">
                 <?php
                 if (count($references) == 0) {
@@ -162,23 +180,6 @@
                 } else {
                 ?>
                 <div class="scroll-cards">
-                    <div class="card">
-                        <div class="mails">
-                            <div class="mail-names">
-                                名前
-                            </div>
-                        </div>
-                        <div class="mail-info">
-                            <p>科目名</p>
-                            用語
-                        </div>
-                        <div></div>
-                        <!-- <div class="bottom-info">
-                            <div class="star">
-                                <i class="bi bi-bookmark" data-id="1"></i>
-                            </div>
-                        </div> -->
-                    </div>
                     
                     <?php foreach ($references as $reference) {
                         $r_id = $reference['reference_id'];
@@ -194,56 +195,19 @@
                                 <p><?php print $reference['subject_name'] ?></p>
                                 <?php print $reference['word'] ?>
                             </div>
-
-                            <!-- <?php if ($signin) { ?>
-                                <div class="bottom-info">
-                                    <?php
-                                        /* ブックマーク */
-                                        $class_name = 'bi bi-bookmark';
-                                        foreach ($bookmarks as $bookmark) {
-                                            if ($r_id == $bookmark['reference_id']) {
-                                                $class_name .= '-fill';
-                                                break;
-                                            }
-                                        }
-                                        // print '<div class="star">';
-                                        // print '<i class="' . $class_name . '" data-id="'.$r_id.'" title="ブックマーク"></i>';
-                                        // print '</div>';
-                                    ?>
-                                </div>
-                            <?php } ?> -->
                         </div>
                     <?php } ?>
                 </div>
                 <?php } ?>
                 <?php /* リファレンス表示終了 */ ?>
 
-                <!-- テスト用 ↓ -->
-                <div class="message">
-                    <button class="delete" data-id="1">削除</button>
-                    <div class="title">
-                        用語
-                    </div>
-                    <div class="message-from">
-                        <div class="subject_name">科目名</div>
-                        <p>
-                            定義
-                        </p>
-                    </div>
-                    <div class="attachment-last">
-                        <i class="bi bi-images"></i>
-                    </div>
-                    <i class="bi bi-chat-left-text inline" data-id="1" href="#chat"></i>
-                    <div class="reply"></div>
-                </div>
-                <!-- テスト用 ↑ -->
-
                 <?php foreach($references as $reference) {
                     $r_id = $reference['reference_id'];
                 ?>
                     <div class="message">
-                        <?php if($signin) { ?>
+                        <?php if($signin && $_SESSION['name'] == $reference['name']) { ?>
                             <button class="delete" data-id="<?php print $r_id; ?>" data-name="<?php print $reference['word'] ?>">削除</button>
+                            <button class="edit inline" data-id="<?php print $r_id; ?>" href="#edit">編集</button>
                         <?php } ?>
                         <div class="title">
                             <?php print $reference['word']; ?>
@@ -259,14 +223,14 @@
                         </div>
 
                         <div class="attachment-last">
-                            <?php if(isset($user_id) && $reference['user_id'] == $user_id && $reference['image'] != '') { ?>
-                                <i class="bi bi-images"></i>
+                            <?php if($reference['image'] != '') { ?>
                                 <img src="./reference/img/<?php print $reference['image'] ?>">
                             <?php } ?>
                         </div>
 
-                        <?php /* 返信 */ ?>
-                        <?php if ($signin) {
+                        <?php /* アイコン */ ?>
+                        <?php
+                            if ($signin) {
                                 print '<i class="bi bi-chat-left-text inline" data-id="'.$r_id.'" href="#chat"></i>';
 
                                 /* ブックマーク */
@@ -280,6 +244,7 @@
                                 print '<i class="' . $class_name . '" data-id="'.$r_id.'" title="ブックマーク"></i>';
                             }
 
+                            /* 返信 */
                             print '<div class="reply">';
                             if (count($replys) > 0) {
                                 foreach ($replys as $reply) {
@@ -304,40 +269,58 @@
             </div>
 
             <?php if($signin) { ?>
-            <div id="add" class="inline" style="display: none;">
-                <form>
+            <div id="add" class="inline hide-area">
+                <form method="post" class="create-form">
                     <div class="error" style="color: red;"></div>
-                    <p><label>科目</label>
+                    <p class="item"><label class="item-label">科目</label>
                     <?php
-
-                        $sql = 'select subject_id, subject_name from subject';
-                        $stmt = $dbh->prepare($sql);
-                        $stmt->execute();
-
-                        $dbh = null;
-
                         print '<select name="subject">';
-                        print '<option value="">-----</option>';
-                        while($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        print '<option value="">-----------</option>';
+                        foreach ($subjects as $rec) {
                             print '<option value="'.$rec['subject_id'].'">'.$rec['subject_name'].'</option>';
                         }
                         print '</select>';
                         print '<br><input type="text" name="subject_name" placeholder="科目名">';
                     ?>
                     </p>
-                    <p><label>用語</label>
+                    <p class="item"><label>用語</label>
                     <input type="text" name="word"></p>
-                    <p><label>定義</label>
+                    <p class="item-text"><label>定義</label><br>
                     <textarea name="definition"></textarea></p>
-                    <p><label>画像</label>
+                    <p class="item-img"><label>画像</label>
                     <input type="file" name="image" accept=".png"></p>
-                    <input type="submit" value="作成">
+                    <input type="submit" value="作成" class="create_a">
                 </form>
             </div>
 
-            <div id="chat" class="inline" style="display: none;">
+            <div id="edit" class="inline hide-area">
+                <form method="post" class="create-form">
+                    <div class="error" style="color: red;"></div>
+                    <input type="hidden" name="r_id">
+                    <p class="item"><label class="item-label">科目</label>
+                    <?php
+                        print '<select name="subject">';
+                        print '<option value="">-----------</option>';
+                        foreach ($subjects as $rec) {
+                            print '<option value="'.$rec['subject_id'].'">'.$rec['subject_name'].'</option>';
+                        }
+                        print '</select>';
+                        print '<br><input type="text" name="subject_name" placeholder="科目名">';
+                    ?>
+                    </p>
+                    <p class="item"><label>用語</label>
+                    <input type="text" name="word"></p>
+                    <p class="item-text"><label>定義</label><br>
+                    <textarea name="definition"></textarea></p>
+                    <input type="hidden" name="old_image">
+                    <p class="item-img"><label>画像</label>
+                    <input type="file" name="image" accept=".png"></p>
+                    <input type="submit" value="編集" class="create_a">
+                </form>
+            </div>
+
+            <div id="chat" class="inline hide-area">
                 <div class="modal-confirm-content" style="text-align: center;">
-                    <!-- <input type="text" name="comment" style="border-bottom: 1px solid;" placeholder="返信"> -->
                     <textarea name="comment" placeholder="返信" style="width: 100%; height: 310px; resize: none; padding: 20px; border: 1px solid"></textarea>
                 </div>
                 <div class="modal-confirm-wrap">
@@ -346,12 +329,6 @@
                 </div>
             </div>
             <?php } ?>
-            <?php
-                /* リファレンス表示のtry文 */
-                } catch (Exception $e) {
-                    print '<br><h2>障害発生中</h2>';
-                }
-            ?>
         </main>
     </body>
 </html>

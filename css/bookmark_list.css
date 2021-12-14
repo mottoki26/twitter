@@ -1,0 +1,30 @@
+.title {
+    position: relative;
+    font-size: 32px;
+    text-align: center;
+}
+
+.book-none {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.button {
+    /* color: blue; */
+    /* margin-left: 46%; */
+    /* border : 2px solid black; */
+    margin-left: 47%;
+    color: #fff;
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    background-color: #555;
+    width: 100px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #1B1A17;
+    -webkit-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+}

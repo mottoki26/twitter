@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/reset.css">
         <link rel="stylesheet" href="../css/signin.css">
-        <!-- <link rel="stylesheet" href="../css/style.css"> -->
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../js/signin.js"></script>
@@ -13,7 +13,7 @@
     <body>
         <main>
             <h1>サインインページ</h1>
-            <div class="error" style="color: red;"></div>
+            <div class="error" style="color: red; margin-bottom: 10px"></div>
             <form method="post">
                 <p><label>メールアドレス</label>
                 <input type="text" name="mail"></p>

@@ -51,7 +51,6 @@
                         print '<input type="button" onclick="history.back()" value="戻る">';
                         print '</form>';
                     }else{
-                        $pass = hash('sha256', $pass);
 
                         print '<form method="post" action="./signupDone.php">';
                         print '<input type="hidden" name="mail" value="'.$mail.'">';

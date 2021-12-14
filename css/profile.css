@@ -1,0 +1,156 @@
+/* 左斜め */
+body {
+  background-color: #FFF;
+background-image: 
+  linear-gradient( transparent 95%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, .06)), linear-gradient( 90deg, transparent 95%, rgba(0, 0, 0, .3) 50%, rgba(0, 0, 0, .06) );
+background-size: 16px 16px;
+background-repeat: repeat;
+width:100%;
+height:10vw;
+}
+
+
+.ribbon3 {
+  display: inline-block;
+  position: relative;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  padding: 7px 0;
+  font-size: 18px;
+  background: #FF8303;
+  color: #FFF;
+  box-sizing: border-box;
+  line-height: 42px;
+  left: 33%;
+  top: 6%;  
+}
+
+.ribbon3 h1 {
+  margin: 0;
+  padding: 0 30px;
+  border-top: dashed 2px rgba(255, 255, 255, 0.5);
+  border-bottom: dashed 2px rgba(255, 255, 255, 0.5);
+}
+
+.ribbon3:before, .ribbon3:after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  z-index: 1;
+}
+
+.ribbon3:before {
+  /*左の山形*/
+  top: 0;
+  left: 0;
+  border-width: 30px 0px 30px 15px;
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+}
+
+.ribbon3:after {
+  /*右の山形*/
+  top: 0;
+  right: 0;
+  border-width: 30px 15px 30px 0px;
+  border-color: transparent #fff transparent transparent;
+  border-style: solid;
+}
+
+
+/* .menber {
+  margin-left: auto;
+  margin-right: auto;
+} */
+
+
+.moppi, .neo, .code_057 {
+  float: left;
+  padding: 10px;
+  width: 25%;
+  background-color: #FFF;
+}
+
+
+.moppi {
+  padding: 0.5em 1em;
+  margin: 7% 0 5% 5%;
+  /* width: max-content; */
+  border: double 5px #81B214;
+}
+.moppi h3 {
+  background:linear-gradient(transparent 60%, #81B214 60%);
+  width: max-content;
+}
+
+.moppi p{
+  padding-top: 3px;
+}
+
+.neo {
+  border: double 5px #39A9CB;
+  padding: 0.5em 1em;
+  margin: 7% 0 5% 7%;
+  /* width: max-content; */
+  left: 80%;
+}
+
+.neo h3 {
+  background:linear-gradient(transparent 60%, #39A9CB 60%);
+  width: max-content;
+}
+
+.neo p{
+  padding-top: 5px;
+}
+
+.code_057 {
+  border: double 5px #79018C;
+  padding: 0.5em 1em;
+  margin: 7% 0 5% 7%;
+  /* width: max-content; */
+}
+
+.code_057 h3 {
+  background:linear-gradient(transparent 60%, #7952B3 60%);
+  width: max-content;
+}
+
+.code_057 p{
+  padding-top: 5px;
+}
+
+
+
+/* footer */
+footer {
+  position: fixed;
+	bottom: 20px;
+  border: #FF8303 double 5px;
+  background-color: #FFF;
+  width: 25%;
+  height: inherit;
+  margin-left: 37%;
+}
+
+footer h3 {
+  margin-left: 50px;
+  margin-right: 50px;
+  background:linear-gradient(transparent 60%, #FF8303 60%);
+  width: max-content;
+}
+
+footer p{
+  margin-left: 80px;
+}
+
+footer a {
+  color: #000;
+  text-decoration: none;
+}
+footer a:hover {
+  color: deeppink;
+  border-bottom: deeppink solid 1px;
+}

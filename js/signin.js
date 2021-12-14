@@ -3,6 +3,7 @@
 $(function() {
     let form = $('form');
     let error = $('.error');
+
     form.on('submit', function() {
 
         /* メールの値取得 */
@@ -21,11 +22,10 @@ $(function() {
                     },
                     dataType: 'json'
                 })
-                /*  */
                 .done(function(data) {
                     switch (data.status) {
                         case 'OK':
-                            window.location.href = '../';
+                            window.location = '../';
                             break;
 
                         case 'ERROR':
@@ -36,12 +36,8 @@ $(function() {
                             log('障害発生中');
                             break;
                     }
-                    console.log(data);
                 })
-                /*  */
-                .fail(function(XMLHttpRequest, status, e) {
-                    log(e);
-                });
+                .fail(function(XMLHttpRequest, status, e) {});
         }
 
         return false;

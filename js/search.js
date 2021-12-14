@@ -1,10 +1,9 @@
 /// <Reference path="./jquery-3.6.0.min.js"/>
 
 $(function() {
-
-    /* ブックマークボタン */
-    $('.right-body').on('click', '.bi-bookmark', bookmark);
-    $('.right-body').on('click', '.bi-bookmark-fill', bookmark);
+    /* 検索用 */
+    $('.message').on('click', '.bi-bookmark', bookmark);
+    $('.message').on('click', '.bi-bookmark-fill', bookmark);
 
     function bookmark() {
         book_dom = this;
@@ -23,4 +22,7 @@ $(function() {
 
             });
     }
+
+    /* モーダルウィンドウ */
+    $(".inline").modal();
 })
