@@ -37,7 +37,9 @@ $(function() {
                             break;
                     }
                 })
-                .fail(function(XMLHttpRequest, status, e) {});
+                .fail(function(XMLHttpRequest, status, e) {
+                    log('メールアドレス又はパスワード違います');
+                });
         }
 
         return false;

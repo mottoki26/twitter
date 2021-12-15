@@ -87,7 +87,6 @@
                     <?php } ?>
 
                     <div class="pro">
-                        <!-- window.location='profile/profile.html' -->
                         <a href="profile/profile.html" target="_blank">チームのプロフィール</a>
                     </div>
                 </div>

@@ -218,8 +218,12 @@ $(function() {
         ));
 
         /* 詳細画面の入力 */
-        let ri_body = messages[0].parentElement;
-
+        let ri_body;
+        if (messages.length == 0) {
+            ri_body = $('.right-body');
+        } else {
+            ri_body = messages[0].parentElement;
+        }
         /* HTMLタグが追加できるようにjQueryに変換 */
         ri_body = $(ri_body);
 
@@ -249,49 +253,77 @@ $(function() {
         }
     }
 
-    let edit_form = $('#edit>form');
-    $('.right-body').on('click', '.edit', function() {
+    function edit() {
+        let edit_form = $('#edit>form');
+        let parent, r_id, options;
+        $('.right-body').on('click', '.edit', function() {
 
-        let parent = this.parentElement;
-        let r_id = this.dataset.id;
-        let error = $('.modal-content-container>form>div.error');
+            parent = this.parentElement;
+            r_id = this.dataset.id;
 
-        edit_form.find('input[name="r_id"]').val(r_id);
+            edit_form.find('input[name="r_id"]').val(r_id);
 
-        /* 科目の選択 */
-        let options = edit_form.children('p').children('select[name="subject"]');
-        // console.log(options.children());
-        for (let i = 0; i < options.children().length; i++) {
-            if (options.children()[i].innerText == parent.querySelector('.subject_name').innerText) {
-                let sub_val = options.children()[i].value;
-                options.val(sub_val);
-                break;
+            /* 科目の選択 */
+            options = edit_form.children('p').children('select[name="subject"]');
+            // console.log(options.children());
+            for (let i = 0; i < options.children().length; i++) {
+                if (options.children()[i].innerText == parent.querySelector('.subject_name').innerText) {
+                    let sub_val = options.children()[i].value;
+                    options.val(sub_val);
+                    break;
+                }
             }
+
+            /* 用語の設定 */
+            let word = parent.querySelector('.title').innerText;
+            edit_form.children('p').children('input[name="word"]').val(word);
+            // console.log(word.innerText);
+
+            /* 定義の設定 */
+            let definition = parent.querySelector('.message-from').querySelector('p').innerText;
+            // console.log(definition);
+            edit_form.find('textarea[name="definition"]').val(definition);
+
+            /* 画像名の設定 */
+            let img = parent.querySelector('.attachment-last').children;
+            edit_form.find('input[name="old_image"]').val('');
+            if (img.length != 0) {
+                /* 日本語のエンコード対策 */
+                let img_split = decodeURI(img[0].src).split('/');
+                let img_name = img_split[img_split.length - 1];
+                // console.log(img_name);
+                edit_form.find('input[name="old_image"]').val(img_name);
+            }
+
+        });
+
+        let flg = false;
+        $('.modal-inline').on('click', function() {
+            if (!flg) {
+                closeModal();
+            }
+        });
+
+        $('.modal-container').on('click', function() {
+            flg = true;
+        });
+
+        $(window).keydown(function(e) {
+            if (e.key == 'Escape') {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            setTimeout(() => {
+                edit_form[0].reset();
+                $('input[type="file"]').val(null);
+            }, 300);
         }
 
-        /* 用語の設定 */
-        let word = parent.querySelector('.title').innerText;
-        edit_form.children('p').children('input[name="word"]').val(word);
-        // console.log(word.innerText);
-
-        /* 定義の設定 */
-        let definition = parent.querySelector('.message-from').querySelector('p').innerText;
-        // console.log(definition);
-        edit_form.find('textarea[name="definition"]').val(definition);
-
-        /* 画像名の設定 */
-        let img = parent.querySelector('.attachment-last').children;
-        edit_form.find('input[name="old_image"]').val('');
-        if (img.length != 0) {
-            let img_split = img[0].src.split('/');
-            let img_name = img_split[img_split.length - 1];
-            // console.log(img_name);
-            edit_form.find('input[name="old_image"]').val(img_name);
-        }
-
-        let form;
         edit_form.on('submit', function() {
-            form = new FormData(edit_form[0]);
+            // let error = $('.modal-content-container>form>div.error');
+            let form = new FormData(edit_form[0]);
             // console.log(...form.entries());
 
             $.ajax({
@@ -303,20 +335,26 @@ $(function() {
                     contentType: false
                 })
                 .done(function(data) {
-                    editCard(data);
+                    // console.log(data);
+                    editCard(form, data);
                 })
                 .fail(function(XMLHttpRequest, status, e) {
-                    console.log(XMLHttpRequest.responseText);
+                    // console.log(XMLHttpRequest.responseText);
+                    // console.log(XMLHttpRequest);
+                    // console.log(status);
+                    // console.log(e);
                 })
 
             /* モーダルウィンドウを閉じる */
             $('#modal-close')[0].click();
-            error[0].innerHTML = '';
+            closeModal();
+            // error[0].innerHTML = '';
             return false;
         })
 
         /* cardとmessageの書き換え */
-        function editCard(data) {
+        function editCard(form, data) {
+            // console.log('test1');
             let mail_info, subject_name;
             for (let i = 0; i < messages.length; i++) {
                 if (parent == messages[i]) {
@@ -328,8 +366,9 @@ $(function() {
 
                     /* 新規じゃなければプルダウンから取得 */
                     if (typeof data.subject == 'undefined') {
-                        for (let i = 0; i < options.children().length; i++) {
-                            if (options.children()[i].value == options.val()) {
+                        let subject_val = form.get('subject');
+                        for (let i = 1; i < options.children().length; i++) {
+                            if (options.children()[i].value == subject_val) {
                                 // console.log(subject_val);
                                 subject_name = options.children()[i].innerText;
                                 break;
@@ -364,30 +403,8 @@ $(function() {
                 }
             }
         }
-
-        let flg = false;
-        $('.modal-inline').on('click', function() {
-            if (!flg) {
-                closeModal();
-            }
-        });
-
-        $('.modal-container').on('click', function() {
-            flg = true;
-        });
-
-        $(window).keydown(function(e) {
-            if (e.key == 'Escape') {
-                closeModal();
-            }
-        });
-
-        function closeModal() {
-            setTimeout(() => {
-                edit_form[0].reset();
-            }, 300);
-        }
-    });
+    }
+    edit();
 
     let chats = $('div[id="chat"]>div[class="modal-confirm-wrap"]');
 
