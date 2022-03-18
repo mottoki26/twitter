@@ -9,36 +9,37 @@ $(function() {
     let menu = $('.menu');
     let nav = $('.navigation');
 
-    let flg_ot = false;
-
     let signup_btn, signin_btn, signout_btn, list_btn, home_btn;
 
-    /* scroll-cardsクラス内のcardクラスのクリックを動的に取得する */
-    $('.scroll-cards').on('click', '.card', function() {
-        for (let i = 0; i < cards.length; i++) {
-            if (this == cards[i]) {
-                this.classList.toggle('active');
+    function scrollCards() {
+        /* scroll-cardsクラス内のcardクラスのクリックを動的に取得する */
+        $('.scroll-cards').on('click', '.card', function() {
+            for (let i = 0; i < cards.length; i++) {
+                if (this == cards[i]) {
+                    this.classList.toggle('active');
 
-                for (let j = 0; j < cards.length; j++) {
-                    if (i !== j) {
-                        if (cards[j].classList.contains('active')) {
-                            cards[j].classList.remove('active');
+                    for (let j = 0; j < cards.length; j++) {
+                        if (i !== j) {
+                            if (cards[j].classList.contains('active')) {
+                                cards[j].classList.remove('active');
+                            }
                         }
                     }
-                }
 
-                for (let j = 0; j < messages.length; j++) {
-                    if (i !== j) {
-                        if (messages[j].classList.contains('active')) {
-                            messages[j].classList.remove('active');
+                    for (let j = 0; j < messages.length; j++) {
+                        if (i !== j) {
+                            if (messages[j].classList.contains('active')) {
+                                messages[j].classList.remove('active');
+                            }
+                        } else {
+                            messages[j].classList.toggle('active');
                         }
-                    } else {
-                        messages[j].classList.toggle('active');
                     }
                 }
             }
-        }
-    });
+        });
+    }
+    scrollCards();
 
     for (let i = 0; i < icons.length; i++) {
         if (icons[i].children.length == 2) {
@@ -120,7 +121,6 @@ $(function() {
         let subject_id = form.get('subject');
         let subject_name = form.get('subject_name');
         let word = form.get('word');
-        let definition = form.get('definition');
         let image = form.get('image');
         let image_name = image['name'];
 
@@ -193,6 +193,15 @@ $(function() {
     /* cardクラスとmessageクラスの追加 */
     function addCard(form, data) {
 
+        if (cards.length == 0) {
+            let ri_body = $('.right-body');
+            ri_body.children().remove();
+            ri_body.append(Array(
+                '<div class="scroll-cards"></div>'
+            ));
+            scrollCards();
+        }
+
         let word = htmlspecialchars(form.get('word'));
         let definition = htmlspecialchars(form.get('definition'));
         let image = form.get('image');
@@ -203,11 +212,9 @@ $(function() {
         let subject = data.subject_name;
 
         /* 概要画面の入力 */
-        let cards_parent = cards.parent();
+        let cards_parent = $('.scroll-cards');
         cards_parent.prepend('<div class="card"></div>');
 
-        /* 要素の更新 */
-        cards = $('.card');
         let card_child = cards_parent.children();
         card_child = card_child[0];
 
@@ -228,8 +235,15 @@ $(function() {
         ri_body = $(ri_body);
 
         /* 詳細画面の入力 */
-        $(messages[0]).before('<div class="message"></div>');
+        if (messages.length == 0) {
+            ri_body.append('<div class="message"></div>');
+        } else {
+            $(messages[0]).before('<div class="message"></div>');
+        }
+
+        /* 要素の更新 */
         messages = $('.message');
+        cards = $('.card');
         let message_child = ri_body.children();
         message_child = message_child[1];
 
@@ -445,7 +459,9 @@ $(function() {
                                 '<div class="mails">',
                                 '<div class="mail-names">' + data.name + '</div>',
                                 '</div>',
-                                '<div class="mail-info">' + comment_val + '</div>',
+                                '<div class="mail-info">',
+                                '<div class="comment">' + comment_val + '</div>',
+                                '</div>',
                             ));
                         }
                     });

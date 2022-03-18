@@ -43,7 +43,7 @@
             try {
                 include_once './common/dbConnection.php';
 
-                $sql = 'select reference.reference_id, user.user_id, subject_name, name, word, definition, image from user, reference, subject, bookmark
+                $sql = 'select reference.reference_id, subject_name, name, word, definition, image from user, reference, subject, bookmark
                         where 1 and user.user_id = reference.user_id and reference.subject_id = subject.subject_id
                         and reference.reference_id = bookmark.reference_id and bookmark.user_id = ? order by reference_id desc';
 

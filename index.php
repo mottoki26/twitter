@@ -86,9 +86,9 @@
                         </div>
                     <?php } ?>
 
-                    <div class="pro">
+                    <!-- <div class="pro">
                         <a href="profile/profile.html" target="_blank">チームのプロフィール</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
             <div class="right-header">
                 <div class="top-bar">
                     <div class="top-bar-justify">
-                        <div class="big-Index">
+                        <div class="big-inbox">
                             Home
                         </div>
                     </div>
