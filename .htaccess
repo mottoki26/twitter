@@ -1,0 +1,6 @@
+<files profile/profile.html>
+  order deny,allow
+  deny from all
+  allow from localhost
+  allow from 127.0.0.1
+</files>
