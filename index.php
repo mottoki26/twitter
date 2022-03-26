@@ -86,9 +86,11 @@
                         </div>
                     <?php } ?>
 
-                    <!-- <div class="pro">
+                    <?php /* ?>
+                    <div class="pro">
                         <a href="profile/profile.html" target="_blank">チームのプロフィール</a>
-                    </div> -->
+                    </div>
+                    <?php */ ?>
                 </div>
             </div>
         </div>
