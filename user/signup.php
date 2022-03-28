@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../css/reset.css">
         <link rel="stylesheet" href="../css/signin.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Twitter</title>
+        <title>SNS風単語帳</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../js/signup.js"></script>
     </head>
