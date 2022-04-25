@@ -25,8 +25,6 @@
         <title>SNS風単語帳</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="./js/modal.min.js"></script>
-        <script src="./js/common.js"></script>
-        <script src="./js/bookmark.js"></script>
     </head>
 
     <body class="dashboard">
@@ -331,5 +329,8 @@
             </div>
             <?php } ?>
         </main>
+        
+        <script src="./js/common.js"></script>
+        <script src="./js/bookmark.js"></script>
     </body>
 </html>
