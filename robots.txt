@@ -1,1 +1,1 @@
-disallow: /
+Allow: /
