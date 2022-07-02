@@ -1,4 +1,4 @@
-/// <Reference path="./jquery-3.6.0.min.js"/>
+/// <reference path="./jquery-3.6.0.min.js"/>
 /// <Reference path="./modal.min.js"/>"
 
 $(function() {
