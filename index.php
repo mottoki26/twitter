@@ -168,7 +168,7 @@
                 /* リファレンス表示のtry文 */
                 } catch (Exception $e) {
                     print '<br><h2>障害発生中</h2>';
-                    print ($e);
+                    error_log($e);
                     exit();
                 }
             ?>
