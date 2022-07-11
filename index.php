@@ -25,6 +25,10 @@
         <title>SNS風単語帳</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="./js/modal.min.js"></script>
+
+        
+        <script src="./js/common.js" defer></script>
+        <script src="./js/bookmark.js" defer></script>
     </head>
 
     <body class="dashboard">
@@ -83,7 +87,6 @@
                             <div class="icon-name">Signin</div>
                         </div>
                     <?php } ?>
-
                     <?php /* ?>
                     <div class="pro">
                         <a href="profile/profile.html" target="_blank">チームのプロフィール</a>
@@ -330,8 +333,5 @@
             </div>
             <?php } ?>
         </main>
-        
-        <script src="./js/common.js"></script>
-        <script src="./js/bookmark.js"></script>
     </body>
 </html>
